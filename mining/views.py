@@ -9,7 +9,7 @@ import bulkload
 BASE_URL = mining_settings.JIRA_REST_BASE_URL
 JIRA_USR = mining_settings.JIRA_USER_NAME
 JIRA_PWD = mining_settings.JIRA_USER_PWD
-customer_list = ["Humana", "Cerner", "Baystate", "Ochsner", "Epic", "Others"]
+customer_list = ["Humana", "Cerner", "Baystate", "Ochsner", "Epic", "Legacy", "Alexian", "Others"]
 
 
 def load_data(request):
@@ -31,16 +31,17 @@ def load_data(request):
 
 def index(request):
     response_list = []
-    for customer in customer_list:
-        case_list = EpsCase.objects.filter(case_customer=customer)
+    for customer_name in customer_list:
+        case_list = EpsCase.objects.filter(
+            customer__customer_name=customer_name
+        )
         inner_object_list = []
         for case in case_list:
             inner_object = {"key": case.case_key, "value": case.case_create_date}
             inner_object_list.append(inner_object)
         if len(inner_object_list) != 0:
-            response = {"name": customer, "cases": inner_object_list}
+            response = {"name": customer_name, "cases": inner_object_list}
             response_list.append(response)
-    print response_list
     return JsonResponse(response_list, safe=False)
 
 

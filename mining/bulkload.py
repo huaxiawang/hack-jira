@@ -43,7 +43,6 @@ def get_customer(case, json):
         labels = json["fields"]["labels"]
         if len(labels) > 0:
             for label in labels:
-                print label
                 if k in label.lower():
                     customer_exist = True
                     Customer.objects.update_or_create(
