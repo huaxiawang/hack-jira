@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'mining',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -55,7 +56,7 @@ ROOT_URLCONF = 'jira.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -103,5 +104,5 @@ STATIC_URL = '/static/'
 
 JIRA_REST_BASE_URL = "https://certifydata.atlassian.net/rest/api/2/issue/"
 JIRA_BROWSE_BASE_URL = "https://certifydata.atlassian.net/browse"
-JIRA_USER_NAME = ""
-JIRA_USER_PWD = ""
+JIRA_USER_NAME = "huaxia"
+JIRA_USER_PWD = "hw@ng$22"

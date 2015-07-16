@@ -6,7 +6,6 @@ class EpsCase(models.Model):
     case_assignee = models.CharField(max_length=50, null=True, default=None)
     case_create_date = models.DateTimeField('Date Created', null=False)
     case_creator = models.CharField(max_length=50, null=True, default=None)
-    case_customer = models.CharField(max_length=20, null=True, default=None)
     case_description = models.TextField(null=True)
     case_id = models.BigIntegerField(null=False)
     case_key = models.CharField(max_length=20, null=False)
@@ -26,13 +25,18 @@ class Comment(models.Model):
     comment_text = models.TextField(null=True)
 
     def __str__(self):
-        if len(self.comment_text) > 200:
-            return self.comment_text[:200] and '..'
-        else:
-            return self.comment_text
+        return self.epsCase.case_summary + " " + self.comment_text[:50] + ".."
 
     def __unicode__(self):
-        if len(self.comment_text) > 200:
-            return self.comment_text[:200] and '..'
-        else:
-            return self.comment_text
+        return self.epsCase.case_summary + " " + self.comment_text[:50] + ".."
+
+
+class Customer(models.Model):
+    epsCase = models.ForeignKey(EpsCase)
+    customer_name = models.CharField(max_length=20, null=True)
+
+    def __str__(self):
+        return self.customer_name
+
+    def __unicode__(self):
+        return self.customer_name
