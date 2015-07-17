@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from django.http import JsonResponse, HttpResponseRedirect
-from django.core.urlresolvers import reverse
+from django.http import HttpResponse, JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 from restkit import Resource, BasicAuth
 from mining import mining_settings, nlp
 from .models import EpsCase
@@ -46,24 +46,32 @@ def index(request):
     # return JsonResponse(response_list, safe=False)
 
 
-def case_list(request):
+@csrf_exempt
+def cases(request):
+    print request
     customer = request.POST.get('customer', False)
     print customer
-    cases = EpsCase.objects.filter(
+    case_list = EpsCase.objects.filter(
         customer__customer_name=customer
-    )
-    return HttpResponseRedirect(reverse('detail', args=(cases, )))
+    ).values_list("case_key", flat=True)
+    print case_list
+    return HttpResponse(" ".join(case_list))
 
 
-def detail(request, cases):
-    return render(request, 'mining/details.html', {"cases": cases})
+def detail(request):
+    print request.GET
+    case_list = request.GET.get("case_list", False)
+    print case_list
+    return render(request, 'mining/detail.html', {"cases": case_list})
 
 
+@csrf_exempt
 def correlation(request):
     response = []
-    case_key = request.POST["case_key"]
+    case_key = request.POST.get("case_key", False)
     related_cases = nlp.get_relation(case_key)
     for case_key, case_similarity in related_cases.iteritems():
         case = EpsCase.objects.get(case_key=case_key)
         response.append({"pid": case.case_key, "ratio": case_similarity, "des": case.case_summary})
+    print response
     return JsonResponse(response, safe=False)

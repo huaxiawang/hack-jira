@@ -76,12 +76,7 @@ $(document).ready(function() {
 
 //console.log($(".col-xs-4 section header i").text}))
   $(".col-xs-4 section").click(function(e) {
-    $.ajax({
-      type: 'POST',
-      url: 'case_list/',
-      data: {"customer": $(this).find("header").text(), 'csrfmiddlewaretoken': csrftoken},
-      success: function(){console.log("success!")}
-    });
+    location.replace("http://localhost:9000/#/correlation?customer="+$(this).find('header').text())
   });
 
   function getMonthlyData() {
