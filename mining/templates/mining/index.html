@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://cdn.jsdelivr.net/jquery.sparkline/2.1.2/jquery.sparkline.min.js"></script>
+    <script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
+    <script type="text/javascript" src="http://code.highcharts.com/modules/exporting.js"></script>
     {% load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static 'mining/css/style.css' %}"/>
     <script type="text/javascript" src="{% static 'mining/js/dashboard.js' %}"></script>
@@ -11,10 +15,10 @@
 <div class="row">
   <div class="col-xs-4">
     <section class="bubble" style="background-color: #fd8d43;">
-      <header><i class="entypo-chart-area"></i> New Fans</header>
+      <header><i class="entypo-chart-bar"></i> Humana</header>
       <article>
         <ul class="sections">
-          <li class="big-num"><h4>365</h4></li>
+          <li class="big-num"><h4>{{ json.Humana|length }}</h4></li>
           <li class="list">
             <ul>
               <li><i class="fa fa-fw fa-clock-o"></i> In last 14 days</li>
@@ -36,10 +40,10 @@
   </div>
   <div class="col-xs-4">
     <section class="bubble" style="background-color: #32b0ed;">
-      <header><i class="entypo-chart-bar"></i> Likes</header>
+      <header><i class="entypo-chart-bar"></i> Cerner</header>
       <article>
         <ul class="sections">
-          <li class="big-num"><h4>293</h4></li>
+          <li class="big-num"><h4>{{ json.Cerner|length }}</h4></li>
           <li class="list">
             <ul>
               <li><i class="fa fa-fw fa-clock-o"></i> In last 14 days</li>
@@ -61,10 +65,135 @@
   </div>
   <div class="col-xs-4">
     <section class="bubble">
-      <header><i class="entypo-chart-line"></i>  Comments</header>
+      <header><i class="entypo-chart-bar"></i>  Baystate</header>
       <article>
         <ul class="sections">
-          <li class="big-num"><h4>122</h4></li>
+          <li class="big-num"><h4>{{ json.Baystate|length }}</h4></li>
+          <li class="list">
+            <ul>
+              <li><i class="fa fa-fw fa-clock-o"></i> In last 14 days</li>
+              <li><i class="fa fa-fw fa-calendar"></i> 2014/10/20 to 2014/08/01</li>
+            </ul>
+          </li>
+        </ul>
+        <span class="inlinebar">6, 2, 1, 3, 1, 2, 3, 4, 1, 5, 3, 5, 3, 1</span>
+      </article>
+      <footer>
+        <ul class="sections">
+          <li></li>
+          <li class="big-num">8%
+            <i class="entypo-up-dir" style="color: #0f0;"></i>
+          </li>
+        </ul>
+      </footer>
+    </section>
+  </div>
+    <div class="col-xs-4">
+    <section class="bubble" style="background-color: #462066">
+      <header><i class="entypo-chart-bar"></i>  Ochsner</header>
+      <article>
+        <ul class="sections">
+          <li class="big-num"><h4>{{ json.Ochsner|length }}</h4></li>
+          <li class="list">
+            <ul>
+              <li><i class="fa fa-fw fa-clock-o"></i> In last 14 days</li>
+              <li><i class="fa fa-fw fa-calendar"></i> 2014/10/20 to 2014/08/01</li>
+            </ul>
+          </li>
+        </ul>
+        <span class="inlinebar">6, 2, 1, 3, 1, 2, 3, 4, 1, 5, 3, 5, 3, 1</span>
+      </article>
+      <footer>
+        <ul class="sections">
+          <li></li>
+          <li class="big-num">8%
+            <i class="entypo-up-dir" style="color: #0f0;"></i>
+          </li>
+        </ul>
+      </footer>
+    </section>
+  </div>
+    <div class="col-xs-4">
+    <section class="bubble" style="background-color: #FFB85F">
+      <header><i class="entypo-chart-bar"></i>  Epic</header>
+      <article>
+        <ul class="sections">
+          <li class="big-num"><h4>{{ json.Epic|length }}</h4></li>
+          <li class="list">
+            <ul>
+              <li><i class="fa fa-fw fa-clock-o"></i> In last 14 days</li>
+              <li><i class="fa fa-fw fa-calendar"></i> 2014/10/20 to 2014/08/01</li>
+            </ul>
+          </li>
+        </ul>
+        <span class="inlinebar">6, 2, 1, 3, 1, 2, 3, 4, 1, 5, 3, 5, 3, 1</span>
+      </article>
+      <footer>
+        <ul class="sections">
+          <li></li>
+          <li class="big-num">8%
+            <i class="entypo-up-dir" style="color: #0f0;"></i>
+          </li>
+        </ul>
+      </footer>
+    </section>
+  </div>
+    <div class="col-xs-4">
+    <section class="bubble" style="background-color: #FF7A5A">
+      <header><i class="entypo-chart-bar"></i>  Legacy</header>
+      <article>
+        <ul class="sections">
+          <li class="big-num"><h4>{{ json.Legacy|length }}</h4></li>
+          <li class="list">
+            <ul>
+              <li><i class="fa fa-fw fa-clock-o"></i> In last 14 days</li>
+              <li><i class="fa fa-fw fa-calendar"></i> 2014/10/20 to 2014/08/01</li>
+            </ul>
+          </li>
+        </ul>
+        <span class="inlinebar">6, 2, 1, 3, 1, 2, 3, 4, 1, 5, 3, 5, 3, 1</span>
+      </article>
+      <footer>
+        <ul class="sections">
+          <li></li>
+          <li class="big-num">8%
+            <i class="entypo-up-dir" style="color: #0f0;"></i>
+          </li>
+        </ul>
+      </footer>
+    </section>
+  </div>
+    <div class="col-xs-4">
+    <section class="bubble" style="background-color: #00AAA0">
+      <header><i class="entypo-chart-bar"></i>  Alexian</header>
+      <article>
+        <ul class="sections">
+          <li class="big-num"><h4>{{ json.Alexian|length }}</h4></li>
+          <li class="list">
+            <ul>
+              <li><i class="fa fa-fw fa-clock-o"></i> In last 14 days</li>
+              <li><i class="fa fa-fw fa-calendar"></i> 2014/10/20 to 2014/08/01</li>
+            </ul>
+          </li>
+        </ul>
+        <span class="inlinebar">6, 2, 1, 3, 1, 2, 3, 4, 1, 5, 3, 5, 3, 1</span>
+      </article>
+      <footer>
+        <ul class="sections">
+          <li></li>
+          <li class="big-num">8%
+            <i class="entypo-up-dir" style="color: #0f0;"></i>
+          </li>
+        </ul>
+      </footer>
+    </section>
+  </div>
+    <div class="col-xs-4">
+    <section class="bubble" style="background-color: #8ED2C9">
+      <header><i class="entypo-chart-bar"></i>  Others</header>
+      <article>
+        <ul class="sections">
+          <li class="big-num"><h4>{{ json.Others|length }}</h4></li>
           <li class="list">
             <ul>
               <li><i class="fa fa-fw fa-clock-o"></i> In last 14 days</li>
@@ -88,3 +217,7 @@
 <div id="container"></div>
 </body>
 </html>
+
+<script type="text/javascript">
+    var cases = "{{ json|safe }}"
+</script>

@@ -1,4 +1,6 @@
 $(document).ready(function() {
+  case_obj = JSON.parse(cases.replace(/'/g, '"'))
+
   $('.inlinebar').sparkline('html', {
     type: 'bar',
     height: '36px',
