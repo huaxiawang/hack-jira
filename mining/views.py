@@ -14,7 +14,7 @@ customer_list = ["Humana", "Cerner", "Baystate", "Ochsner", "Epic", "Legacy", "A
 
 def load_data(request):
     loaded_case = []
-    for num in range(14, 115):
+    for num in range(187, 188):
         auth = BasicAuth(JIRA_USR, JIRA_PWD)
         resource = Resource(BASE_URL + "EPS-" + str(num), filters=[auth])
         response = resource.get(headers={'Content-Type': 'application/json'})
@@ -42,8 +42,12 @@ def index(request):
         if len(inner_object_list) != 0:
             response = {"name": customer_name, "cases": inner_object_list}
             response_list.append(response)
-    return JsonResponse(response_list, safe=False)
+    return render(request, "mining/index.html", {"json": response_list})
+    # return JsonResponse(response_list, safe=False)
 
 
 def detail(request):
     customer = request.POST["customer"]
+    case_list = EpsCase.objects.filter(
+        customer__customer_name=customer
+    )

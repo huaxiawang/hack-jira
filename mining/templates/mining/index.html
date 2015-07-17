@@ -1,10 +1,90 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'mining/css/style.css' %}"/>
+    <script type="text/javascript" src="{% static 'mining/js/dashboard.js' %}"></script>
     <meta charset="UTF-8">
     <title></title>
 </head>
 <body>
-
+<div class="row">
+  <div class="col-xs-4">
+    <section class="bubble" style="background-color: #fd8d43;">
+      <header><i class="entypo-chart-area"></i> New Fans</header>
+      <article>
+        <ul class="sections">
+          <li class="big-num"><h4>365</h4></li>
+          <li class="list">
+            <ul>
+              <li><i class="fa fa-fw fa-clock-o"></i> In last 14 days</li>
+              <li><i class="fa fa-fw fa-calendar"></i> 2014/10/20 to 2014/08/01</li>
+            </ul>
+          </li>
+        </ul>
+        <span class="inlinebar">1,3,5,3,5,1,4,3,2,1,3,1,2,6</span>
+      </article>
+      <footer>
+        <ul class="sections">
+          <li><i class="fa fa-fw fa-clock-o"></i> 12 Days Ago</li>
+          <li class="big-num">39%
+            <i class="entypo-up-dir" style="color: #0f0;"></i>
+          </li>
+        </ul>
+      </footer>
+    </section>
+  </div>
+  <div class="col-xs-4">
+    <section class="bubble" style="background-color: #32b0ed;">
+      <header><i class="entypo-chart-bar"></i> Likes</header>
+      <article>
+        <ul class="sections">
+          <li class="big-num"><h4>293</h4></li>
+          <li class="list">
+            <ul>
+              <li><i class="fa fa-fw fa-clock-o"></i> In last 14 days</li>
+              <li><i class="fa fa-fw fa-calendar"></i> 2014/10/20 to 2014/08/01</li>
+            </ul>
+          </li>
+        </ul>
+        <span class="inlinebar">1, 1, 1, 1, 2, 2, 3, 3, 3, 3, 4, 5, 5, 6</span>
+      </article>
+      <footer>
+        <ul class="sections">
+          <li></li>
+          <li class="big-num">-12%
+            <i class="entypo-down-dir" style="color: #f00;"></i>
+          </li>
+        </ul>
+      </footer>
+    </section>
+  </div>
+  <div class="col-xs-4">
+    <section class="bubble">
+      <header><i class="entypo-chart-line"></i>  Comments</header>
+      <article>
+        <ul class="sections">
+          <li class="big-num"><h4>122</h4></li>
+          <li class="list">
+            <ul>
+              <li><i class="fa fa-fw fa-clock-o"></i> In last 14 days</li>
+              <li><i class="fa fa-fw fa-calendar"></i> 2014/10/20 to 2014/08/01</li>
+            </ul>
+          </li>
+        </ul>
+        <span class="inlinebar">6, 2, 1, 3, 1, 2, 3, 4, 1, 5, 3, 5, 3, 1</span>
+      </article>
+      <footer>
+        <ul class="sections">
+          <li></li>
+          <li class="big-num">8%
+            <i class="entypo-up-dir" style="color: #0f0;"></i>
+          </li>
+        </ul>
+      </footer>
+    </section>
+  </div>
+</div>
+<div id="container"></div>
 </body>
 </html>
