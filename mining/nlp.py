@@ -3,6 +3,7 @@ import nltk
 import string
 from .models import EpsCase, Comment
 from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import linear_kernel
 from nltk.stem.porter import PorterStemmer
 
 token_dict = {}
@@ -38,3 +39,11 @@ def get_tfidf():
     tfidf = TfidfVectorizer(tokenizer=tokenize, stop_words='english')
     tfs = tfidf.fit_transform(token_dict.values())
     return tfs
+
+
+def get_relation(case_key):
+    tfs = get_tfidf()
+    case_index = token_dict.keys().index(case_key)
+    cosine_similarities = linear_kernel(tfs[case_index:case_index+1], tfs).flatten()
+    related_docs_indices = cosine_similarities.argsort()[:-7:-1]
+    return dict((token_dict.keys()[index], cosine_similarities[index]) for index in related_docs_indices)

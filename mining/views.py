@@ -1,7 +1,8 @@
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
+from django.core.urlresolvers import reverse
 from restkit import Resource, BasicAuth
-from mining import mining_settings
+from mining import mining_settings, nlp
 from .models import EpsCase
 import json
 import bulkload
@@ -45,8 +46,24 @@ def index(request):
     # return JsonResponse(response_list, safe=False)
 
 
-def detail(request):
-    customer = request.POST["customer"]
-    case_list = EpsCase.objects.filter(
+def case_list(request):
+    customer = request.POST.get('customer', False)
+    print customer
+    cases = EpsCase.objects.filter(
         customer__customer_name=customer
     )
+    return HttpResponseRedirect(reverse('detail', args=(cases, )))
+
+
+def detail(request, cases):
+    return render(request, 'mining/details.html', {"cases": cases})
+
+
+def correlation(request):
+    response = []
+    case_key = request.POST["case_key"]
+    related_cases = nlp.get_relation(case_key)
+    for case_key, case_similarity in related_cases.iteritems():
+        case = EpsCase.objects.get(case_key=case_key)
+        response.append({"pid": case.case_key, "ratio": case_similarity, "des": case.case_summary})
+    return JsonResponse(response, safe=False)
